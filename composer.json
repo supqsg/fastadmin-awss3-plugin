@@ -1,0 +1,23 @@
+{
+    "name": "fastadmin/awss3",
+    "description": "AWS S3 cloud storage plugin for FastAdmin - Upload files to Amazon S3 or S3-compatible storage services",
+    "type": "library",
+    "keywords": ["fastadmin", "aws", "s3", "cloud storage", "upload", "storage"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "FastAdmin AWS S3 Plugin Contributors",
+            "email": "your-email@example.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.4",
+        "aws/aws-sdk-php": "^3.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "addons\\awss3\\": ""
+        }
+    },
+    "minimum-stability": "stable"
+}
