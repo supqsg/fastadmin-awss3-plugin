@@ -29,10 +29,10 @@
 
 将插件下载或克隆到 FastAdmin 的 `addons` 目录：
 
-\`\`\`bash
+```bash
 cd /path/to/your/fastadmin
 git clone https://github.com/YOUR_USERNAME/fastadmin-awss3.git addons/awss3
-\`\`\`
+```
 
 或手动下载后解压到 `addons/awss3` 目录。
 
@@ -40,10 +40,10 @@ git clone https://github.com/YOUR_USERNAME/fastadmin-awss3.git addons/awss3
 
 插件依赖 AWS SDK for PHP，需要通过 Composer 安装：
 
-\`\`\`bash
+```bash
 cd /path/to/your/fastadmin
 composer require aws/aws-sdk-php
-\`\`\`
+```
 
 ### 3. 后台安装插件
 
@@ -62,12 +62,12 @@ composer require aws/aws-sdk-php
 1. 登录 [AWS 管理控制台](https://console.aws.amazon.com/)
 2. 进入 **IAM (Identity and Access Management)**
 3. 创建新用户或选择现有用户
-4. 为用户分配 S3 访问权限（推荐使用策略：\`AmazonS3FullAccess\` 或自定义策略）
+4. 为用户分配 S3 访问权限（推荐使用策略：`AmazonS3FullAccess` 或自定义策略）
 5. 创建访问密钥，记录 **Access Key ID** 和 **Secret Access Key**
 
 **推荐的 S3 权限策略示例：**
 
-\`\`\`json
+```json
 {
   "Version": "2012-10-17",
   "Statement": [
@@ -82,21 +82,21 @@ composer require aws/aws-sdk-php
     }
   ]
 }
-\`\`\`
+```
 
 ### 2. 创建 S3 存储桶
 
 1. 在 AWS 控制台进入 **S3** 服务
 2. 点击 **创建存储桶 (Create Bucket)**
-3. 输入存储桶名称（例如：\`my-bucket\`）
-4. 选择区域（例如：\`us-east-1\`）
+3. 输入存储桶名称（例如：`my-bucket`）
+4. 选择区域（例如：`us-east-1`）
 5. 根据需要配置存储桶设置（推荐开启版本控制）
 
 **配置存储桶公开访问：**
 
 如果需要让上传的文件可公开访问，需要配置存储桶策略：
 
-\`\`\`json
+```json
 {
   "Version": "2012-10-17",
   "Statement": [
@@ -109,7 +109,7 @@ composer require aws/aws-sdk-php
     }
   ]
 }
-\`\`\`
+```
 
 ### 3. 配置插件
 
@@ -117,25 +117,25 @@ composer require aws/aws-sdk-php
 
 | 配置项 | 说明 | 示例 |
 |--------|------|------|
-| **AWS Access Key ID** | AWS 访问密钥 ID | \`AKIAIOSFODNN7EXAMPLE\` |
-| **AWS Secret Access Key** | AWS 访问密钥 | \`wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY\` |
-| **S3 Bucket名称** | S3 存储桶名称 | \`my-bucket\` |
-| **S3 Region** | S3 区域 | \`us-east-1\` |
-| **CDN地址** | S3 访问地址或 CDN 地址 | \`https://my-bucket.s3.us-east-1.amazonaws.com\` |
-| **上传模式** | 固定为服务器中转 | \`server\` |
-| **服务器备份** | 是否保留本地副本 | \`否\` (推荐，节省空间) |
-| **保存文件名** | 文件路径模板 | \`/uploads/{year}{mon}{day}/{filemd5}{.suffix}\` |
-| **最大上传大小** | 单个文件最大大小 | \`100M\` |
-| **可上传格式** | 允许的文件扩展名 | \`jpg,png,gif,pdf,zip\` |
-| **分片上传** | 是否启用分片上传 | \`关闭\` (大文件建议开启) |
-| **同步删除S3文件** | 删除附件时是否删除 S3 文件 | \`是\` |
-| **API接口使用S3存储** | API 上传是否使用 S3 | \`是\` |
+| **AWS Access Key ID** | AWS 访问密钥 ID | `AKIAIOSFODNN7EXAMPLE` |
+| **AWS Secret Access Key** | AWS 访问密钥 | `wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY` |
+| **S3 Bucket名称** | S3 存储桶名称 | `my-bucket` |
+| **S3 Region** | S3 区域 | `us-east-1` |
+| **CDN地址** | S3 访问地址或 CDN 地址 | `https://my-bucket.s3.us-east-1.amazonaws.com` |
+| **上传模式** | 固定为服务器中转 | `server` |
+| **服务器备份** | 是否保留本地副本 | `否` (推荐，节省空间) |
+| **保存文件名** | 文件路径模板 | `/uploads/{year}{mon}{day}/{filemd5}{.suffix}` |
+| **最大上传大小** | 单个文件最大大小 | `100M` |
+| **可上传格式** | 允许的文件扩展名 | `jpg,png,gif,pdf,zip` |
+| **分片上传** | 是否启用分片上传 | `关闭` (大文件建议开启) |
+| **同步删除S3文件** | 删除附件时是否删除 S3 文件 | `是` |
+| **API接口使用S3存储** | API 上传是否使用 S3 | `是` |
 
 **CDN 地址说明：**
 
-- 如果直接使用 S3 地址，格式为：\`https://[bucket].s3.[region].amazonaws.com\`
-- 如果使用 CloudFront CDN，填写 CDN 域名：\`https://d1234567890.cloudfront.net\`
-- 如果使用自定义域名，填写自定义域名：\`https://cdn.yourdomain.com\`
+- 如果直接使用 S3 地址，格式为：`https://[bucket].s3.[region].amazonaws.com`
+- 如果使用 CloudFront CDN，填写 CDN 域名：`https://d1234567890.cloudfront.net`
+- 如果使用自定义域名，填写自定义域名：`https://cdn.yourdomain.com`
 
 ### 4. 禁用其他云存储插件
 
@@ -154,30 +154,30 @@ composer require aws/aws-sdk-php
 1. 在任何表单中使用上传组件（例如：编辑文章时上传图片）
 2. 选择文件并上传
 3. 文件会自动上传到 S3
-4. 数据库 \`mk_attachment\` 表中的 \`storage\` 字段会被标记为 \`awss3\`
+4. 数据库 `mk_attachment` 表中的 `storage` 字段会被标记为 `awss3`
 
 **查看上传的文件：**
 
-在 **附件管理** (\`/admin/general/attachment\`) 中可以查看所有上传的文件：
+在 **附件管理** (`/admin/general/attachment`) 中可以查看所有上传的文件：
 
-- \`storage\` 字段显示为 \`awss3\` 表示存储在 S3
-- \`url\` 字段显示文件相对路径（例如：\`/uploads/20231201/abc123.jpg\`）
+- `storage` 字段显示为 `awss3` 表示存储在 S3
+- `url` 字段显示文件相对路径（例如：`/uploads/20231201/abc123.jpg`）
 - 完整访问 URL = CDN地址 + url
 
 ### API 上传
 
 如果启用了 "API接口使用S3存储" 选项，API 接口的上传也会使用 S3：
 
-\`\`\`bash
+```bash
 POST /api/common/upload
 Content-Type: multipart/form-data
 
 file: [binary data]
-\`\`\`
+```
 
 **响应示例：**
 
-\`\`\`json
+```json
 {
   "code": 1,
   "msg": "上传成功",
@@ -186,47 +186,47 @@ file: [binary data]
     "fullurl": "https://my-bucket.s3.us-east-1.amazonaws.com/uploads/20231201/abc123.jpg"
   }
 }
-\`\`\`
+```
 
 ### 程序中使用
 
 如果需要在自定义代码中使用 S3 上传服务：
 
-\`\`\`php
+```php
 <?php
 
 // 引入 S3 上传服务类
-use addons\\awss3\\library\\S3UploaderService;
+use addons\awss3\library\S3UploaderService;
 
 // 创建服务实例（自动从插件配置读取参数）
-\$s3Service = new S3UploaderService();
+$s3Service = new S3UploaderService();
 
 // 上传文件
-\$localFilePath = '/path/to/local/file.jpg';
-\$s3Key = 'uploads/file.jpg'; // S3 中的路径
-\$s3Url = \$s3Service->upload(\$localFilePath, \$s3Key);
+$localFilePath = '/path/to/local/file.jpg';
+$s3Key = 'uploads/file.jpg'; // S3 中的路径
+$s3Url = $s3Service->upload($localFilePath, $s3Key);
 
-if (\$s3Url) {
-    echo "上传成功: " . \$s3Url;
+if ($s3Url) {
+    echo "上传成功: " . $s3Url;
 } else {
     echo "上传失败";
 }
 
 // 删除文件
-\$success = \$s3Service->delete('uploads/file.jpg');
+$success = $s3Service->delete('uploads/file.jpg');
 
 // 检查文件是否存在
-\$exists = \$s3Service->exists('uploads/file.jpg');
+$exists = $s3Service->exists('uploads/file.jpg');
 
 // 生成预签名 URL（用于私有文件的临时访问）
-\$presignedUrl = \$s3Service->getPresignedUrl('uploads/file.jpg', '+20 minutes');
-\`\`\`
+$presignedUrl = $s3Service->getPresignedUrl('uploads/file.jpg', '+20 minutes');
+```
 
 ## 🔍 技术架构
 
 ### 工作流程
 
-\`\`\`
+```
 用户上传文件
     ↓
 FastAdmin 后台/API
@@ -235,7 +235,7 @@ awss3 插件拦截 (uploadConfigInit 钩子)
     ↓
 修改上传配置 (uploadurl → awss3/index/upload)
     ↓
-addons\\awss3\\controller\\Index::upload()
+addons\awss3\controller\Index::upload()
     ↓
 调用 S3UploaderService::upload()
     ↓
@@ -246,7 +246,7 @@ addons\\awss3\\controller\\Index::upload()
 清理本地临时文件
     ↓
 返回 S3 URL
-\`\`\`
+```
 
 ### 插件钩子
 
@@ -258,7 +258,7 @@ addons\\awss3\\controller\\Index::upload()
 
 ### 目录结构
 
-\`\`\`
+```
 addons/awss3/
 ├── Awss3.php              # 插件主类（钩子处理）
 ├── config.php             # 插件配置定义
@@ -269,7 +269,7 @@ addons/awss3/
 ├── library/
 │   └── S3UploaderService.php  # S3 上传服务类
 └── README.md              # 说明文档
-\`\`\`
+```
 
 ## ❓ 故障排查
 
@@ -279,18 +279,18 @@ addons/awss3/
 
 **解决：**
 
-1. **检查日志：** 查看 \`runtime/log/\` 目录下的日志文件，搜索 "S3" 相关错误
-   \`\`\`bash
-   tail -f runtime/log/\$(date +%Y%m%d).log | grep "S3"
-   \`\`\`
+1. **检查日志：** 查看 `runtime/log/` 目录下的日志文件，搜索 "S3" 相关错误
+   ```bash
+   tail -f runtime/log/$(date +%Y%m%d).log | grep "S3"
+   ```
 
 2. **检查 AWS 凭证：** 确认插件配置中的 Access Key ID 和 Secret Access Key 正确无误
 
 3. **检查存储桶：** 确认 S3 Bucket 存在且有写入权限
 
-4. **检查网络：** 确认服务器能访问 AWS S3（可尝试 ping \`s3.amazonaws.com\`）
+4. **检查网络：** 确认服务器能访问 AWS S3（可尝试 ping `s3.amazonaws.com`）
 
-5. **检查 PHP 扩展：** 确认 PHP 已安装 \`curl\` 扩展
+5. **检查 PHP 扩展：** 确认 PHP 已安装 `curl` 扩展
 
 ### 2. 文件无法访问
 
@@ -300,13 +300,13 @@ addons/awss3/
 
 1. **检查存储桶权限：** 确认 S3 Bucket 的访问权限设置为公开读取（或配置了正确的 Bucket 策略）
 
-2. **检查 CDN 地址：** 确认插件配置中的 "CDN地址" 正确（例如：\`https://my-bucket.s3.us-east-1.amazonaws.com\`）
+2. **检查 CDN 地址：** 确认插件配置中的 "CDN地址" 正确（例如：`https://my-bucket.s3.us-east-1.amazonaws.com`）
 
 3. **检查 CORS 配置：** 如果是跨域访问问题，需要配置 S3 Bucket 的 CORS 规则
 
 **S3 CORS 配置示例：**
 
-\`\`\`json
+```json
 [
   {
     "AllowedHeaders": ["*"],
@@ -315,7 +315,7 @@ addons/awss3/
     "ExposeHeaders": []
   }
 ]
-\`\`\`
+```
 
 ### 3. 插件未生效
 
@@ -326,9 +326,9 @@ addons/awss3/
 1. **确认插件已启用：** 在 **插件管理** 中确认插件状态为 "已启用"
 
 2. **清空缓存：** 后台 → 系统管理 → 清空缓存，或手动删除：
-   \`\`\`bash
+   ```bash
    rm -rf runtime/cache/*
-   \`\`\`
+   ```
 
 3. **禁用其他插件：** 禁用其他云存储插件（如阿里云 OSS）
 
@@ -336,11 +336,11 @@ addons/awss3/
 
 ### 4. 附件表中 storage 字段显示错误
 
-**问题：** 上传后 \`mk_attachment\` 表中 \`storage\` 字段不是 \`awss3\`
+**问题：** 上传后 `mk_attachment` 表中 `storage` 字段不是 `awss3`
 
 **解决：**
 
-1. 检查插件代码中 \`storage\` 字段的赋值逻辑（应为 \`\$attachment->storage = 'awss3';\`）
+1. 检查插件代码中 `storage` 字段的赋值逻辑（应为 `$attachment->storage = 'awss3';`）
 2. 清空缓存并重新上传测试
 
 ### 5. 大文件上传失败
@@ -351,11 +351,11 @@ addons/awss3/
 
 1. **启用分片上传：** 在插件配置中开启 "分片上传"
 2. **调整 PHP 配置：**
-   \`\`\`ini
+   ```ini
    upload_max_filesize = 200M
    post_max_size = 200M
    max_execution_time = 300
-   \`\`\`
+   ```
 3. **调整分片大小：** 在插件配置中设置合适的 "分片大小"（默认 4MB）
 
 ## 🔐 安全建议
@@ -384,19 +384,19 @@ addons/awss3/
 
 对于非 AWS S3 的服务，可能需要自定义 endpoint：
 
-\`\`\`php
+```php
 // 修改 library/S3UploaderService.php 的构造函数
-\$clientConfig = [
+$clientConfig = [
     'version' => 'latest',
-    'region'  => \$this->region,
+    'region'  => $this->region,
     'endpoint' => 'https://s3.example.com', // 自定义 endpoint
     'credentials' => [
-        'key'    => \$config['access_key_id'],
-        'secret' => \$config['secret_access_key'],
+        'key'    => $config['access_key_id'],
+        'secret' => $config['secret_access_key'],
     ],
     'use_path_style_endpoint' => true, // 某些服务需要此选项
 ];
-\`\`\`
+```
 
 ## 📝 更新日志
 
